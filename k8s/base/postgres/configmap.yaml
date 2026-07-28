@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: postgres-config
+  namespace: employee-management
+data:
+  POSTGRES_DB: employee_management

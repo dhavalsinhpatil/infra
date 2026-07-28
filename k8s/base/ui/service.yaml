@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: ui
+  namespace: employee-management
+spec:
+  selector:
+    app: ui
+  ports:
+    - port: 80
+      targetPort: 80
+      name: http
