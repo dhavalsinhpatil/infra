@@ -1,0 +1,73 @@
+namespace: employee-management
+
+api:
+  image:
+    repository: employee-management-api
+    tag: local
+    pullPolicy: IfNotPresent
+  replicaCount: 2
+  service:
+    port: 8080
+  resources:
+    requests:
+      cpu: 250m
+      memory: 384Mi
+    limits:
+      cpu: 750m
+      memory: 768Mi
+  autoscaling:
+    enabled: true
+    minReplicas: 2
+    maxReplicas: 5
+    targetCPUUtilizationPercentage: 70
+    targetMemoryUtilizationPercentage: 80
+  env:
+    serverPort: "8080"
+  # DEV-ONLY placeholders. Override via --set or a separate values file
+  # backed by a real secrets source for anything beyond a local cluster.
+  secrets:
+    dbUsername: postgres
+    dbPassword: postgres-dev-only-change-me
+    jwtSecret: dev-only-jwt-secret-change-in-production-min-256-bits-long
+
+ui:
+  image:
+    repository: employee-management-ui
+    tag: local
+    pullPolicy: IfNotPresent
+  replicaCount: 2
+  service:
+    port: 80
+  resources:
+    requests:
+      cpu: 50m
+      memory: 64Mi
+    limits:
+      cpu: 200m
+      memory: 128Mi
+
+postgres:
+  image:
+    repository: postgres
+    tag: 16-alpine
+  service:
+    port: 5432
+  storage:
+    size: 1Gi
+  resources:
+    requests:
+      cpu: 100m
+      memory: 256Mi
+    limits:
+      cpu: 500m
+      memory: 512Mi
+  db: employee_management
+  # DEV-ONLY placeholders, same caveat as api.secrets above.
+  secrets:
+    user: postgres
+    password: postgres-dev-only-change-me
+
+ingress:
+  enabled: true
+  className: nginx
+  host: employee-management.local
