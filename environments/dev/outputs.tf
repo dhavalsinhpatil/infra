@@ -21,3 +21,11 @@ output "github_actions_ci_role_arn" {
 output "app_runtime_role_arn" {
   value = module.iam.app_runtime_role_arn
 }
+
+output "eks_cluster_name" {
+  value = module.eks.cluster_name
+}
+
+output "eks_cluster_endpoint" {
+  value = module.eks.cluster_endpoint
+}

@@ -1,0 +1,22 @@
+# Overrides for the dev namespace on the shared EKS cluster.
+# Base values.yaml still supplies everything not listed here.
+namespace: employee-management-dev
+
+api:
+  image:
+    repository: REPLACE_WITH_ECR_URL/employee-management-api
+    tag: latest
+    pullPolicy: Always
+  replicaCount: 1
+  autoscaling:
+    enabled: false
+
+ui:
+  image:
+    repository: REPLACE_WITH_ECR_URL/employee-management-ui
+    tag: latest
+    pullPolicy: Always
+  replicaCount: 1
+
+ingress:
+  host: dev.employee-management.example.com

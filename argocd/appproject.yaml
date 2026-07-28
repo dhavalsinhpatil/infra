@@ -8,7 +8,9 @@ spec:
   sourceRepos:
     - https://github.com/dhavalsinhpatil/infra.git
   destinations:
-    - namespace: employee-management
+    - namespace: employee-management-dev
+      server: https://kubernetes.default.svc
+    - namespace: employee-management-prod
       server: https://kubernetes.default.svc
   clusterResourceWhitelist:
     - group: ""

@@ -1,0 +1,32 @@
+# Overrides for the prod namespace on the shared EKS cluster.
+# Base values.yaml still supplies everything not listed here.
+#
+# api.secrets / postgres.secrets are intentionally NOT overridden here —
+# do not put real prod credentials in a values file committed to Git.
+# Wire these through AWS Secrets Manager (a module already exists in
+# modules/ but isn't provisioned yet) or External Secrets Operator before
+# this is used for anything beyond a dry run. Applying this chart as-is
+# against prod deploys with the dev-only placeholder credentials from
+# values.yaml, which is not safe.
+namespace: employee-management-prod
+
+api:
+  image:
+    repository: REPLACE_WITH_ECR_URL/employee-management-api
+    tag: latest
+    pullPolicy: Always
+  replicaCount: 2
+  autoscaling:
+    enabled: true
+    minReplicas: 2
+    maxReplicas: 4
+
+ui:
+  image:
+    repository: REPLACE_WITH_ECR_URL/employee-management-ui
+    tag: latest
+    pullPolicy: Always
+  replicaCount: 2
+
+ingress:
+  host: employee-management.example.com

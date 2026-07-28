@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: employee-management
+  name: employee-management-dev
   namespace: argocd
 spec:
   project: employee-management
@@ -12,9 +12,10 @@ spec:
     helm:
       valueFiles:
         - values.yaml
+        - values-dev.yaml
   destination:
     server: https://kubernetes.default.svc
-    namespace: employee-management
+    namespace: employee-management-dev
   syncPolicy:
     automated:
       selfHeal: true

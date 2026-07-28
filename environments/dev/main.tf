@@ -28,3 +28,20 @@ module "iam" {
   github_repos        = var.github_repos
   ecr_repository_arns = values(module.ecr.repository_arns)
 }
+
+module "eks" {
+  source = "../../modules/eks"
+
+  name_prefix = var.name_prefix
+  vpc_id      = module.vpc.vpc_id
+
+  # Public subnets: NAT Gateway is disabled for cost, so nodes need a
+  # direct internet route (image pulls, EKS API) that only the public
+  # subnets provide without it.
+  subnet_ids = module.vpc.public_subnet_ids
+
+  node_instance_types = ["t3.small"]
+  node_desired_size   = 2
+  node_min_size       = 1
+  node_max_size       = 3
+}
