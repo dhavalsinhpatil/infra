@@ -3,7 +3,7 @@
 # passed via CLI/CI instead of hardcoding here.
 terraform {
   backend "s3" {
-    bucket         = "REPLACE_WITH_STATE_BUCKET_NAME"
+    bucket         = "employee-mgmt-tfstate-452383571229"
     key            = "dev/terraform.tfstate"
     region         = "us-east-1"
     dynamodb_table = "employee-management-terraform-locks"

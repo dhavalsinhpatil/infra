@@ -4,7 +4,7 @@ namespace: employee-management-dev
 
 api:
   image:
-    repository: REPLACE_WITH_ECR_URL/employee-management-api
+    repository: 452383571229.dkr.ecr.us-east-1.amazonaws.com/employee-management-api
     tag: latest
     pullPolicy: Always
   replicaCount: 1
@@ -13,10 +13,10 @@ api:
 
 ui:
   image:
-    repository: REPLACE_WITH_ECR_URL/employee-management-ui
+    repository: 452383571229.dkr.ecr.us-east-1.amazonaws.com/employee-management-ui
     tag: latest
     pullPolicy: Always
   replicaCount: 1
 
 ingress:
-  host: dev.employee-management.example.com
+  host: dev.employee-management.local
